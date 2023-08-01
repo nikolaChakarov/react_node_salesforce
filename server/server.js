@@ -8,5 +8,5 @@ const app = express();
 expressConfig(app);
 
 app.listen(5005, () => {
-	console.log('app is running at port 5005');
+    console.log('app is running at port 5005');
 });
