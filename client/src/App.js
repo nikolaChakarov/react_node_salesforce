@@ -6,7 +6,7 @@ import SubmitForm from './submit-form/submit-form';
 const App = () => {
     const { token } = useContext(GlobalContext);
 
-    return <div>{!token ? <SubmitForm /> : <LoginForm />}</div>;
+    return <div>{token ? <SubmitForm /> : <LoginForm />}</div>;
 };
 
 export default App;
