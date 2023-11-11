@@ -7,13 +7,24 @@ const SubmitForm = () => {
     const nameRef = useRef();
     const fileRef = useRef();
 
+    const [noFileSelectdError, setNoFileSelectedError] = useState(false);
+
     const [apexContarcts, setApexContracts] = useState([]);
+
+    const handleFileChange = () => {
+        setNoFileSelectedError(false);
+    };
 
     const handleSubmit = async () => {
         const data = {
             customerName: nameRef.current.value,
             file: fileRef.current.files[0],
         };
+
+        if (!fileRef.current.files[0]) {
+            setNoFileSelectedError(true);
+            return;
+        }
 
         handleUploadDataToSalesforce(data);
     };
@@ -74,7 +85,9 @@ const SubmitForm = () => {
                     type='file'
                     id='fileToUpload'
                     name='fileToUpload'
+                    onChange={handleFileChange}
                 />
+                {noFileSelectdError && <p>Please, select a file to upload</p>}
             </label>
 
             <div className='btn-wrapper'>
