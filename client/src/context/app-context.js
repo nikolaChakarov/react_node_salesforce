@@ -31,13 +31,24 @@ export const GlobalProvider = ({ children }) => {
     const handleUploadDataToSalesforce = async (data) => {
         const formData = new FormData();
         formData.append('current', data.file);
-        formData.append('salesforceAuthToken', state.token);
+        // to delete!
+        const tokenForTestNotToLoginAllTheTime =
+            '00D06000000yu0j!ARIAQFGj1sIEeNRnwTf1BV8YW7tRJKNRbudcLtpkksUq_sQ_eH5MMBvfN6HHHy8onGxC6u8DqeH3RJqwvHE5I0CgtHRHKDWU';
+
+        formData.append(
+            'salesforceAuthToken',
+            state.token || tokenForTestNotToLoginAllTheTime
+        );
+        formData.append('apexPath', '/services/apexrest/api/webhooks/');
 
         // no content type when we use FormData
-        const dbresJson = await fetch('http://localhost:5005/sf/upload', {
-            body: formData,
-            method: 'POST',
-        });
+        const dbresJson = await fetch(
+            'http://localhost:5005/sf/upload/apex-file',
+            {
+                body: formData,
+                method: 'POST',
+            }
+        );
 
         const res = await dbresJson.json();
         console.log(res);

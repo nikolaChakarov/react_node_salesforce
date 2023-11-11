@@ -30,6 +30,8 @@ getSObject.post('/apex', (req, res, next) => {
         accessToken: token,
     });
 
+    console.log('apex path::', apexPath);
+
     // body payload structure is depending to the Apex REST method interface.
     // var body = { title: 'hello', num: 1 }; // for POST
     conn.apex.get(apexPath, function (err, ap) {

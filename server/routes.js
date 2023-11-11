@@ -5,6 +5,6 @@ import { upload } from './routes/upload.js';
 
 export const router = express.Router();
 
-router.use('/sf/auth', authRouter);
-router.use('/sf/sobject', getSObject);
-router.use('/sf/upload', upload);
+router.use('/sf/auth/', authRouter);
+router.use('/sf/sobject/', getSObject);
+router.use('/sf/upload/', upload);
