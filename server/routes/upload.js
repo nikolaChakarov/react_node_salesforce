@@ -37,3 +37,9 @@ upload.post('/apex-file', async (req, res) => {
 
     res.status(200).json({ msg: 'ok!!!' });
 });
+
+upload.post('/api', async (req, res) => {
+    console.log('req.body:', req.files);
+
+    res.send('ok!');
+});
