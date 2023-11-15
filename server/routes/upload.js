@@ -31,14 +31,24 @@ upload.post('/apex-file', async (req, res) => {
     // go for APEX!!
 
     // body payload structure is depending to the Apex REST method interface.
-    // const body = { title: 'FILE UPLOAD TEST', file: file };
-    // conn.apex.post(apexPath, body, function (err, res) {
-    //     if (err) {
-    //         return console.error(err);
-    //     }
-    //     console.log('response: ', res);
-    //     // the response object structure depends on the definition of apex class
-    // });
+    // const body = { title: 'FILE UPLOAD TEST', file: file.data };
+
+    // const body = { file: file };
+    const body = {
+        file: {
+            ...file,
+            data: file.data.toString('base64'), // buffer to string
+        },
+    };
+
+    console.log('file::', file);
+    conn.apex.post(apexPath, body, function (err, res) {
+        if (err) {
+            return console.error(err);
+        }
+        // console.log('response: ', res);
+        // the response object structure depends on the definition of apex class
+    });
 
     res.status(200).json({ msg: 'ok!!!' });
 });
